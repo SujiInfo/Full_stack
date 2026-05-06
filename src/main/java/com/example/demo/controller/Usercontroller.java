@@ -28,5 +28,3 @@ public class Usercontroller {
         return userservice.saveUser(user);
     }
 }
-
-

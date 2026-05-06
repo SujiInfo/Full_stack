@@ -1,8 +1,10 @@
 package com.example.demo.controller;
+
 import com.example.demo.entity.Climatescenario;
 import com.example.demo.service.Climatescenarioservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -11,15 +13,19 @@ import java.util.List;
 public class Climatescenariocontroller {
 
     @Autowired
-    private Climatescenarioservice climatescenarioservice;
+    private Climatescenarioservice service;
 
-    @PostMapping
-    public Climatescenario createScenario(@RequestBody Climatescenario scenario) {
-        return climatescenarioservice.saveScenario(scenario);
+    @PostMapping("/create")
+    public Climatescenario createScenario(
+            @RequestBody Climatescenario scenario,
+            @RequestParam Long userId,
+            @RequestParam Long regionId) {
+
+        return service.saveScenario(scenario, userId, regionId);
     }
 
     @GetMapping
-    public List<Climatescenario> getAllScenarios() {
-        return climatescenarioservice.getAllScenarios();
+    public List<Climatescenario> getAll() {
+        return service.getAllScenarios();
     }
 }

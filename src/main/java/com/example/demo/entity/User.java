@@ -1,35 +1,11 @@
-/* package com.example.demo.entity;
-
-import jakarta.persistence.*;
-import lombok.*;
-import java.util.List;
-
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String name;
-
-    private String email;
-
-    private String password;
-
-    @OneToMany(mappedBy = "user")
-    private List<Climatescenario> scenarios;
-}
- */
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 
 @Entity
+@Table(name = "\"user\"")
 public class User {
 
     @Id
@@ -39,6 +15,10 @@ public class User {
     private String name;
     private String email;
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Climatescenario> scenarios;
 
     public User() {
     }
@@ -80,5 +60,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Climatescenario> getScenarios() {
+        return scenarios;
+    }
+
+    public void setScenarios(List<Climatescenario> scenarios) {
+        this.scenarios = scenarios;
     }
 }
